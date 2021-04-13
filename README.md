@@ -116,11 +116,3 @@ Elasticsearch 会在7.0之后的版本废弃TransportClient，在8.0之后的版
 #### 	11.6 terms_stats统计
 
 #### 	11.7 geo_distance统计
-
-
-
-# Java技术交流QQ群
-
-完整代码与资料下载，问题交流，请加QQ群，群号（**1047661092**）
-
-![](./docs/images/ma.png)
