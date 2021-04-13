@@ -5,7 +5,7 @@ import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import java.io.IOException;
 
 public interface IndexService {
-    public void createIndex(String index, String type, CreateIndexRequest request) throws IOException;
+    public void createIndex(String index,  CreateIndexRequest request) throws IOException;
 
     public void deleteIndex(String index) throws IOException;
 

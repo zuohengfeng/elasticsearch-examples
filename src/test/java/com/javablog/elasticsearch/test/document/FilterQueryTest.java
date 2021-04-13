@@ -30,12 +30,12 @@ public class FilterQueryTest {
 
     @Test
     public void testFilterInBoolQuery() throws IOException {
-        filterQuery.filterInBoolQuery(indexName,type);
+        filterQuery.filterInBoolQuery(indexName);
     }
 
     @Test
     public void testRangeCardQuery() throws IOException {
-        filterQuery.rangeQuery(indexName,type,"fee",1,5);
+        filterQuery.rangeQuery(indexName,"fee",1,5);
     }
 
     @Test
@@ -53,9 +53,9 @@ public class FilterQueryTest {
                 "为您提供专业的技术服务，全体员工期待您的光临！");
         smsSendLog.setProvince("北京");
         smsSendLog.setOperatorId(1);
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog),"300");
+        docService.add(indexName, JSON.toJSONString(smsSendLog),"300");
         Thread.sleep(2000l);
-        filterQuery.existQuery(indexName,type,"replyTotal");
+        filterQuery.existQuery(indexName,"replyTotal");
     }
 
     @Test

@@ -44,13 +44,13 @@ public class DeleteByQueryTest {
             smsSendLog.setOperatorId(1);
             smsSendLog.setFee(3);
             int k = 1000 + i;
-            docService.add(indexName, type, JSON.toJSONString(smsSendLog), String.valueOf(k));
+            docService.add(indexName, JSON.toJSONString(smsSendLog), String.valueOf(k));
         }
     }
 
     @Test
     public void testDeleteByQuery() throws IOException {
-        docService.deleteByQuery(indexName, type, "corpName", "贝壳网");
+        docService.deleteByQuery(indexName, "corpName", "贝壳网");
     }
 
 }

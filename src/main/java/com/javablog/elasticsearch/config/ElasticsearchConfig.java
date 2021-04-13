@@ -1,7 +1,11 @@
 package com.javablog.elasticsearch.config;
 
 import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
@@ -33,6 +37,10 @@ public class ElasticsearchConfig {
     private int maxConnectNum = 100; // 最大连接数
     @Value("${spring.data.elasticsearch.maxConnectPerRoute}")
     private int maxConnectPerRoute = 100; // 最大路由连接数
+    @Value("${spring.data.elasticsearch.username}")
+    private String username; // 集群地址，多个用,隔开
+    @Value("${spring.data.elasticsearch.password}")
+    private String password; // 集群地址，多个用,隔开
     private RestClientBuilder builder;
 
     @Bean
@@ -47,6 +55,11 @@ public class ElasticsearchConfig {
         builder = RestClient.builder(hostList.toArray(new HttpHost[0]));
         setConnectTimeOutConfig();
         setMutiConnectConfig();
+
+        CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, password));
+        builder.setHttpClientConfigCallback(f -> f.setDefaultCredentialsProvider(credentialsProvider));
+
         RestHighLevelClient client = new RestHighLevelClient(builder);
         return client;
     }

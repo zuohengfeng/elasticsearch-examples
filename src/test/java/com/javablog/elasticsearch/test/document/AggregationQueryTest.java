@@ -34,7 +34,7 @@ public class AggregationQueryTest {
 
     @Test
     public void testAvgAggregations() throws IOException {
-        aggregationQuery.AvgAggregations(indexName,type,"replyTotal");
+        aggregationQuery.AvgAggregations(indexName,"replyTotal");
     }
 
     //其作用是对选择字段先执行类似sql中的distinct操作，去掉集合中的重复项，然后统计排重后的集合长度。
@@ -42,9 +42,9 @@ public class AggregationQueryTest {
     @Test
     public void testCardinalityAggregations() throws IOException {
         //统计去重后的公司数量
-        aggregationQuery.cardinalityAggregations(indexName,type,"corpName");
+        aggregationQuery.cardinalityAggregations(indexName,"corpName");
         //统计去重后的手机数量
-        aggregationQuery.cardinalityAggregations(indexName,type,"mobile");
+        aggregationQuery.cardinalityAggregations(indexName,"mobile");
     }
 
     @Test
@@ -64,53 +64,53 @@ public class AggregationQueryTest {
             smsSendLog5.setProvince("湖北省");
             smsSendLog5.setOperatorId(1);
             int k = 50 + i;
-            docService.add(indexName, type, JSON.toJSONString(smsSendLog5), String.valueOf(k));
+            docService.add(indexName,  JSON.toJSONString(smsSendLog5), String.valueOf(k));
         }
         Thread.sleep(2000);
         System.out.println("======================= 统计开始 ==================================");
-        aggregationQuery.dateHistogramAggregation(indexName, type, "createDate");
+        aggregationQuery.dateHistogramAggregation(indexName,  "createDate");
         System.out.println("======================= 统计结束 ==================================");
     }
 
     @Test
     public void testDateRangeAggregation() throws IOException, ParseException, InterruptedException {
         System.out.println("======================= 统计开始 dateRangeAggregation ==================================");
-        aggregationQuery.dateRangeAggregation(indexName, type, "createDate");
+        aggregationQuery.dateRangeAggregation(indexName,  "createDate");
         System.out.println("======================= 统计结束 dateRangeAggregation==================================");
     }
 
     @Test
     public void testFilterAggregation() throws IOException, ParseException, InterruptedException {
         System.out.println("======================= 统计开始 filterAggregation==================================");
-        aggregationQuery.filterAggregation(indexName,type,"province","湖北省");
+        aggregationQuery.filterAggregation(indexName,"province","湖北省");
         System.out.println("======================= 统计结束 filterAggregation==================================");
     }
 
     @Test
     public void testHistogramAggregation() throws IOException, ParseException, InterruptedException {
         System.out.println("======================= 统计开始 HistogramAggregation==================================");
-        aggregationQuery.histogramAggregation(indexName,type,"fee",5);
+        aggregationQuery.histogramAggregation(indexName,"fee",5);
         System.out.println("======================= 统计结束 HistogramAggregation==================================");
     }
 
     @Test
     public void testHistogramDateAggregation() throws IOException, ParseException, InterruptedException {
         System.out.println("======================= 统计开始 HistogramAggregation==================================");
-        aggregationQuery.histogramDateAggregation(indexName,type,"createDate",1);
+        aggregationQuery.histogramDateAggregation(indexName,"createDate",1);
         System.out.println("======================= 统计结束 HistogramAggregation==================================");
     }
 
     @Test
     public void testExtendedStatsAggregation() throws IOException {
         System.out.println("======================= 统计开始 ExtendedStatsAggregation==================================");
-        aggregationQuery.extendedStatsAggregation(indexName,type,"replyTotal");
+        aggregationQuery.extendedStatsAggregation(indexName,"replyTotal");
         System.out.println("======================= 统计结束 ExtendedStatsAggregation==================================");
     }
 
     @Test
     public void testTermsAggregation() throws IOException {
         System.out.println("======================= 统计开始 TermsAggregation==================================");
-        aggregationQuery.termsAggregation(indexName,type,1458332215006l,1659035753905l);
+        aggregationQuery.termsAggregation(indexName,1458332215006l,1659035753905l);
         System.out.println("======================= 统计结束 TermsAggregation==================================");
     }
 

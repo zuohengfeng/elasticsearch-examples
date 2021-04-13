@@ -31,15 +31,15 @@ public class GeoQueryTest {
     private IndexService indexService;
     @Autowired
     private DocService docService;
-    @Autowired
-    private GeoQuery geoQuery;
+//    @Autowired
+//    private GeoQuery geoQuery;
 
     @Test
     public void testCreateIndex() throws IOException {
         CreateIndexRequest request = new CreateIndexRequest(indexName);
         buildSetting(request);
         buildIndexMapping(request, type);
-        indexService.createIndex(indexName,type,request);
+        indexService.createIndex(indexName,request);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class GeoQueryTest {
                         .endObject()
                      .endObject()
                 .endObject();
-        request.mapping(type, mappingBuilder);
+        //request.mapping( mappingBuilder);
     }
 
     @Test
@@ -114,26 +114,26 @@ public class GeoQueryTest {
                 "\"location\": {\"lat\": \"23.16667\", \"lon\": \"113.23333\"}"
                 +"}";
 
-        docService.add(indexName, type, json1);
-        docService.add(indexName, type, json2);
-        docService.add(indexName, type, json3);
-        docService.add(indexName, type, json4);
-        docService.add(indexName, type, json5);
+        docService.add(indexName,  json1);
+        docService.add(indexName,  json2);
+        docService.add(indexName,  json3);
+        docService.add(indexName,  json4);
+        docService.add(indexName,  json5);
     }
 
     @Test
     public void testGeoDistanceQuery() throws IOException {
         //距厦门500公里以内的城市
-        geoQuery.geoDistanceQuery(indexName,type,24.46667,118.0000,500);
+       /// geoQuery.geoDistanceQuery(indexName,24.46667,118.0000,500);
     }
 
     @Test
     public void testGeoBoundingBoxh() throws IOException {
-        geoQuery.geoBoundingBoxQuery(indexName,type,40.8,-74.0,40.715,-73.0);
+       // geoQuery.geoBoundingBoxQuery(indexName,40.8,-74.0,40.715,-73.0);
     }
 
     @Test
     public void testPolygonQuery() throws IOException {
-        geoQuery.geoPolygonQuery(indexName,type);
+       // geoQuery.geoPolygonQuery(indexName,type);
     }
 }

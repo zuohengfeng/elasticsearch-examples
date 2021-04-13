@@ -25,18 +25,18 @@ public class SortQueryTest {
     //默认排序
     @Test
     public void testSortQueryByDefault() throws IOException {
-        sortQuery.queryMatch(indexName,type,"smsContent","中国银行");
+        sortQuery.queryMatch(indexName, "smsContent", "中国银行");
     }
 
     //条件排序
     @Test
     public void testSortQueryBySort() throws IOException {
-        sortQuery.sortQuery(indexName,type,"smsContent","中国银行","replyTotal", SortOrder.DESC);
+        sortQuery.sortQuery(indexName, "smsContent", "中国银行", "replyTotal", SortOrder.DESC);
     }
 
     //多条件排序
     @Test
     public void testSortQueryByMultSort() throws IOException {
-        sortQuery.multSortQuery(indexName,type,"smsContent","中国银行","replyTotal","province", SortOrder.DESC);
+        sortQuery.multSortQuery(indexName, "smsContent", "中国银行", "replyTotal", "province", SortOrder.DESC);
     }
 }

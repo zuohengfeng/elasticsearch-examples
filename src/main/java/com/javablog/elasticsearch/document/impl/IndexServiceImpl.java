@@ -30,7 +30,7 @@ public class IndexServiceImpl implements IndexService {
      * @throws IOException
      */
     @Override
-    public void createIndex(String index,String type,CreateIndexRequest request) throws IOException {
+    public void createIndex(String index,CreateIndexRequest request) throws IOException {
         log.info("source:" + request.toString());
         if (!existsIndex(index)) {
             CreateIndexResponse response = restHighLevelClient.indices().create(request, RequestOptions.DEFAULT);
@@ -48,13 +48,13 @@ public class IndexServiceImpl implements IndexService {
      */
     @Override
     public void deleteIndex(String index) throws IOException {
-        GetIndexRequest getIndexRequest = new GetIndexRequest();
-        getIndexRequest.indices(index);
-        if (restHighLevelClient.indices().exists(getIndexRequest)) {
-            DeleteIndexRequest deleteIndexRequest = new DeleteIndexRequest(index);
-            log.info("source:" + deleteIndexRequest.toString());
-            restHighLevelClient.indices().delete(deleteIndexRequest);
-        }
+//        GetIndexRequest getIndexRequest = new GetIndexRequest();
+//        getIndexRequest.indices(index);
+//        if (restHighLevelClient.indices().exists(getIndexRequest)) {
+//            DeleteIndexRequest deleteIndexRequest = new DeleteIndexRequest(index);
+//            log.info("source:" + deleteIndexRequest.toString());
+//            restHighLevelClient.indices().delete(deleteIndexRequest);
+//        }
     }
 
     /**

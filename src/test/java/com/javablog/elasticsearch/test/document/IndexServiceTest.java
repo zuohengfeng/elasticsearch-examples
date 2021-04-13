@@ -34,7 +34,7 @@ public class IndexServiceTest {
         CreateIndexRequest request = new CreateIndexRequest(indexName);
         buildSetting(request);
         buildIndexMapping(request, type);
-        indexService.createIndex(indexName,type,request);
+        indexService.createIndex(indexName,request);
     }
 
     @Test
@@ -133,7 +133,7 @@ public class IndexServiceTest {
                         .endObject()
                      .endObject()
                 .endObject();
-        request.mapping(type, mappingBuilder);
+       // request.mapping( mappingBuilder);
     }
 
 

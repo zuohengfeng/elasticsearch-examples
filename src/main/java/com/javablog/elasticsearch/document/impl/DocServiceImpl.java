@@ -38,37 +38,42 @@ public class DocServiceImpl implements DocService {
     private RestHighLevelClient restHighLevelClient;
 
     @Override
-    public void add(String index,String type,String json) throws IOException {
-        IndexRequest indexRequest = new IndexRequest(index, type);
+    public boolean add(String index, String json) throws IOException {
+        IndexRequest indexRequest = new IndexRequest(index);
         indexRequest.source(json, XContentType.JSON);
         IndexResponse indexResponse = restHighLevelClient.index(indexRequest, RequestOptions.DEFAULT);
-        log.debug("add: " + JSON.toJSONString(indexResponse));
+        log.info("add: " + JSON.toJSONString(indexResponse));
+        int status = indexResponse.status().getStatus();
+        if (status == 200) {
+            return true;
+        }
+        return false;
     }
 
 
     @Override
-    public void add(String index,String type,String json,String id) throws IOException {
-        IndexRequest indexRequest = new IndexRequest(index, type, id);
+    public void add(String index, String json, String id) throws IOException {
+        IndexRequest indexRequest = new IndexRequest(index).id(id);
         indexRequest.source(json, XContentType.JSON);
         IndexResponse indexResponse = restHighLevelClient.index(indexRequest, RequestOptions.DEFAULT);
-        log.debug("add: " + JSON.toJSONString(indexResponse));
+        log.info("add: " + JSON.toJSONString(indexResponse));
     }
 
     /**
      * 删除
+     *
      * @param indexName 索引名称
-     * @param typeName TYPE名称
-     * @param docId    文档ID
+     * @param docId     文档ID
      * @throws IOException
      */
     @Override
-    public void deleteDocWithId(String indexName, String typeName, String docId) throws IOException {
+    public void deleteDocWithId(String indexName, String docId) throws IOException {
         DeleteRequest request = new DeleteRequest(
                 indexName,
-                typeName,
                 docId);
         DeleteResponse response = restHighLevelClient.delete(request, RequestOptions.DEFAULT);
-        System.out.println(response+""+response.getResult());
+        System.out.println(response.status().getStatus());
+        System.out.println(response + "" + response.getResult());
     }
 
     @Override
@@ -79,51 +84,49 @@ public class DocServiceImpl implements DocService {
     }
 
     @Override
-    public  long countDoc(String indexName, String typeName) throws IOException {
+    public long countDoc(String indexName) throws IOException {
         SearchRequest searchRequest = new SearchRequest(indexName);
-        searchRequest.types(typeName);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(QueryBuilders.matchAllQuery());
         searchRequest.source(searchSourceBuilder);
-        SearchResponse searchResponse =  restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+        SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
         SearchHits hits = searchResponse.getHits();
-        System.out.println(hits.totalHits);
-        return searchResponse.getHits().getTotalHits();
+        System.out.println(hits.getTotalHits());
+        return searchResponse.getHits().getTotalHits().value;
     }
 
     @Override
-    public UpdateResponse update(String index,String type,Map<String, Object> map,String id) throws IOException {
-        UpdateRequest request = new UpdateRequest(index,type,id).doc(map);
+    public UpdateResponse update(String index, Map<String, Object> map, String id) throws IOException {
+        UpdateRequest request = new UpdateRequest(index, id).doc(map);
         UpdateResponse updateResponse = restHighLevelClient.update(request, RequestOptions.DEFAULT);
-        log.debug("update: " + JSON.toJSONString(updateResponse));
+        log.info("update: " + JSON.toJSONString(updateResponse));
         return updateResponse;
     }
 
     /**
-     *  批量增加与修改
-     * @param indexName 索引名称
-     * @param typeName  TYPE名称
-     * @param BulkRequest 批量请求
+     * 批量增加与修改
+     *
+     * @param indexName   索引名称
      * @throws IOException
      */
     @Override
-    public BulkResponse bulkUpdateOrInsertDoc(String indexName, String typeName, BulkRequest builder) throws IOException {
+    public BulkResponse bulkUpdateOrInsertDoc(String indexName, BulkRequest builder) throws IOException {
         BulkResponse bulkResponse = restHighLevelClient.bulk(builder, RequestOptions.DEFAULT);
         return bulkResponse;
     }
 
     /**
-     *  批量删除
+     * 批量删除
+     *
      * @param indexName 索引名称
-     * @param typeName  TYPE名称
-     * @param docIdArr _ID数组
+     * @param docIdArr  _ID数组
      * @throws IOException
      */
     @Override
-    public void bulkDeleteDoc(String indexName, String typeName, String[] docIdArr) throws IOException {
-        BulkRequest  bulkRequestBuilder = new BulkRequest();
+    public void bulkDeleteDoc(String indexName, String[] docIdArr) throws IOException {
+        BulkRequest bulkRequestBuilder = new BulkRequest();
         for (String docId : docIdArr) {
-            bulkRequestBuilder.add(new DeleteRequest(indexName, typeName,docId));
+            bulkRequestBuilder.add(new DeleteRequest(indexName, docId));
         }
         BulkResponse bulkResponse = restHighLevelClient.bulk(bulkRequestBuilder, RequestOptions.DEFAULT);
         log.info(bulkResponse.toString());
@@ -131,15 +134,15 @@ public class DocServiceImpl implements DocService {
 
     /**
      * 删除查询的数据
-     * @param indexName 索引名称
-     * @param typeName  TYPE名称
-     * @param fieldName   查询字段名称
-     * @param fieldValue  查询字段值
+     *
+     * @param indexName  索引名称
+     * @param fieldName  查询字段名称
+     * @param fieldValue 查询字段值
      * @throws IOException
      */
     @Override
-    public void deleteByQuery(String indexName, String typeName,String fieldName,String  fieldValue) throws IOException {
-        DeleteByQueryRequest deleteByQueryRequest = new DeleteByQueryRequest(indexName).types(typeName).setQuery(QueryBuilders.termQuery(fieldName, fieldValue));
+    public void deleteByQuery(String indexName, String fieldName, String fieldValue) throws IOException {
+        DeleteByQueryRequest deleteByQueryRequest = new DeleteByQueryRequest(indexName).setQuery(QueryBuilders.termQuery(fieldName, fieldValue));
         BulkByScrollResponse bulkByScrollResponse = restHighLevelClient.deleteByQuery(deleteByQueryRequest, RequestOptions.DEFAULT);
         log.info(bulkByScrollResponse.toString());
     }

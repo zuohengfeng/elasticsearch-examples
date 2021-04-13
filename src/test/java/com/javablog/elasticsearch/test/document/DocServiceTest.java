@@ -31,7 +31,9 @@ import java.util.Map;
 public class DocServiceTest {
     private final static Logger log = LoggerFactory.getLogger(DocServiceTest.class);
     private String indexName = "sms-logs-index";
-    private String type = "sms_logs_type";
+//    private String type = "sms_logs_type";
+//    private String indexName = "statement_test";
+    //private String type = "sms_logs_type";
     @Autowired
     private DocService docService;
 
@@ -66,14 +68,14 @@ public class DocServiceTest {
         smsSendLog.setProvince("北京");
         smsSendLog.setOperatorId(1);
         smsSendLog.setFee(3);
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog),"1");
+        docService.add(indexName, JSON.toJSONString(smsSendLog),"1");
 
         smsSendLog.setMobile("13700000001");
         smsSendLog.setProvince("上海");
         smsSendLog.setSmsContent("【途虎养车】亲爱的刘红先生/女士，您在途虎购买的货品(单号TH1234526)已到指定安装店多日，" +
                 "现需与您确认订单的安装情况，请点击链接按实际情况选择（此链接有效期为72H）。您也可以登录途虎APP进入" +
                 "“我的-待安装订单”进行预约安装。若您在服务过程中有任何疑问，请致电400-111-8868向途虎咨询。");
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog),"2");
+        docService.add(indexName, JSON.toJSONString(smsSendLog),"2");
 
         SmsSendLog smsSendLog1 = new SmsSendLog();
         smsSendLog1.setMobile("13100000000");
@@ -88,13 +90,13 @@ public class DocServiceTest {
         smsSendLog1.setProvince("北京");
         smsSendLog1.setOperatorId(2);
         smsSendLog1.setFee(5);
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog1),"3");
+        docService.add(indexName, JSON.toJSONString(smsSendLog1),"3");
 
         smsSendLog1.setMobile("18600000001");
         smsSendLog1.setProvince("上海");
         smsSendLog1.setSmsContent("【盒马】您尾号7775678的订单已开始配送，请在您指定的时间收货不要走开哦~配送员：" +
                 "王五，电话：13800000001");
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog1),"4");
+        docService.add(indexName, JSON.toJSONString(smsSendLog1),"4");
 
         SmsSendLog smsSendLog2 = new SmsSendLog();
         smsSendLog2.setMobile("15300000000");
@@ -109,13 +111,13 @@ public class DocServiceTest {
         smsSendLog2.setProvince("上海");
         smsSendLog2.setOperatorId(3);
         smsSendLog2.setFee(7);
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog2),"5");
+        docService.add(indexName, JSON.toJSONString(smsSendLog2),"5");
 
         smsSendLog2.setMobile("18000000001");
         smsSendLog2.setProvince("湖北省");
         smsSendLog2.setSmsContent("【滴滴单车平台】专属限时福利！青桔/小蓝月卡立享5折，特惠畅骑30天。" +
                 "戳 https://xxxxxx退订TD");
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog2),"6");
+        docService.add(indexName, JSON.toJSONString(smsSendLog2),"6");
 
         SmsSendLog smsSendLog3 = new SmsSendLog();
         smsSendLog3.setMobile("13900000000");
@@ -130,13 +132,13 @@ public class DocServiceTest {
         smsSendLog3.setProvince("上海");
         smsSendLog3.setOperatorId(1);
         smsSendLog3.setFee(8);
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog3),"7");
+        docService.add(indexName, JSON.toJSONString(smsSendLog3),"7");
 
         smsSendLog3.setMobile("13990000001");
         smsSendLog3.setProvince("湖北省");
         smsSendLog3.setSmsContent("【招商银行】尊贵的李四先生,恭喜您获得华为P30 Pro抽奖资格,还可领100元打" +
                 "车红包,仅限1天");
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog3),"8");
+        docService.add(indexName, JSON.toJSONString(smsSendLog3),"8");
 
         SmsSendLog smsSendLog4 = new SmsSendLog();
         smsSendLog4.setMobile("13700000000");
@@ -150,7 +152,7 @@ public class DocServiceTest {
         smsSendLog4.setProvince("湖北省");
         smsSendLog4.setOperatorId(1);
         smsSendLog4.setFee(5);
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog4),"9");
+        docService.add(indexName, JSON.toJSONString(smsSendLog4),"9");
 
         SmsSendLog smsSendLog5 = new SmsSendLog();
         smsSendLog5.setMobile("13600000000");
@@ -167,7 +169,7 @@ public class DocServiceTest {
         smsSendLog5.setOperatorId(1);
         smsSendLog5.setFee(4);
 
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog5),"10");
+        docService.add(indexName, JSON.toJSONString(smsSendLog5),"10");
 
         SmsSendLog smsSendLog7 = new SmsSendLog();
         smsSendLog7.setMobile("13600000000");
@@ -181,7 +183,7 @@ public class DocServiceTest {
         smsSendLog7.setProvince("湖北省");
         smsSendLog7.setOperatorId(1);
         smsSendLog7.setFee(4);
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog7),"11");
+        docService.add(indexName, JSON.toJSONString(smsSendLog7),"11");
 
         SmsSendLog smsSendLog8 = new SmsSendLog();
         smsSendLog8.setMobile("13600000000");
@@ -195,7 +197,7 @@ public class DocServiceTest {
         smsSendLog8.setProvince("湖北省");
         smsSendLog8.setOperatorId(1);
         smsSendLog8.setFee(4);
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog8),"12");
+        docService.add(indexName, JSON.toJSONString(smsSendLog8),"12");
     }
 
     /**
@@ -205,7 +207,7 @@ public class DocServiceTest {
     @Test
     public void testDelDoc() throws IOException {
         //DOCID从增加日志中取或从图形界面中找
-        docService.deleteDocWithId(indexName,type,"10");
+        docService.deleteDocWithId(indexName,"12");
     }
 
     /**
@@ -216,7 +218,7 @@ public class DocServiceTest {
     public void testBulkDeleteDoc() throws IOException {
         //DOCID从增加日志中取或从Kibana图形界面中找
         String[] docidArr =new String[]{"9","8"};
-        docService.bulkDeleteDoc(indexName,type, docidArr);
+        docService.bulkDeleteDoc(indexName, docidArr);
     }
 
     /** 注意：
@@ -236,7 +238,7 @@ public class DocServiceTest {
      */
     @Test
     public void testRefresh() throws IOException {
-        long docSize1 = docService.countDoc(indexName, type);
+        long docSize1 = docService.countDoc(indexName);
         SmsSendLog smsSendLog5 = new SmsSendLog();
         smsSendLog5.setMobile("13600000000");
         smsSendLog5.setCorpName("中国移动");
@@ -249,11 +251,11 @@ public class DocServiceTest {
         smsSendLog5.setProvince("湖北省");
         smsSendLog5.setOperatorId(1);
         smsSendLog5.setFee(5);
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog5),"8");
-        long docSize2 = docService.countDoc(indexName, type);
+        docService.add(indexName, JSON.toJSONString(smsSendLog5),"8");
+        long docSize2 = docService.countDoc(indexName);
         System.out.println("docSize1:" + docSize1 + " docSize2:" + docSize2 + " 因为没有刷新，docSize1 == docSize2");
 
-        long docSize3 = docService.countDoc(indexName, type);
+        long docSize3 = docService.countDoc(indexName);
         SmsSendLog smsSendLog6 = new SmsSendLog();
         smsSendLog6.setMobile("13600000000");
         smsSendLog6.setCorpName("中国移动");
@@ -266,10 +268,10 @@ public class DocServiceTest {
         smsSendLog6.setProvince("湖北省");
         smsSendLog6.setOperatorId(1);
         smsSendLog6.setFee(9);
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog6),"9");
+        docService.add(indexName, JSON.toJSONString(smsSendLog6),"9");
         //刷新
         docService.refresh(indexName);
-        long docSize4 = docService.countDoc(indexName, type);
+        long docSize4 = docService.countDoc(indexName);
         System.out.println("docSize3:" + docSize3 + " docSize4:" + docSize4 + " 因为有刷新，docSize3 =! docSize4");
     }
 
@@ -288,13 +290,13 @@ public class DocServiceTest {
         smsSendLog6.setProvince("湖北省");
         smsSendLog6.setOperatorId(1);
         smsSendLog6.setFee(6);
-        docService.add(indexName,type, JSON.toJSONString(smsSendLog6),"10");
+        docService.add(indexName, JSON.toJSONString(smsSendLog6),"10");
         Thread.sleep(3000l);
         //3.更新这个文档 age改为18
         Map<String,Object> map =new HashMap<>();
         map.put("province","天津");
         map.put("replyTotal",100);
-        UpdateResponse update = docService.update(indexName, type, map, "10");
+        UpdateResponse update = docService.update(indexName, map, "10");
     }
 
 
@@ -331,10 +333,10 @@ public class DocServiceTest {
         smsSendLog6.setOperatorId(1);
         smsSendLog6.setFee(6);
 
-        bulkRequestBuilder.add(new IndexRequest(indexName, type, String.valueOf(100)).source(JSON.toJSONString(smsSendLog5), XContentType.JSON));
-        bulkRequestBuilder.add(new IndexRequest(indexName, type, String.valueOf(101)).source(JSON.toJSONString(smsSendLog6), XContentType.JSON));
+        bulkRequestBuilder.add(new IndexRequest(indexName).id(String.valueOf(100)).source(JSON.toJSONString(smsSendLog5), XContentType.JSON));
+        bulkRequestBuilder.add(new IndexRequest(indexName).id(String.valueOf(101)).source(JSON.toJSONString(smsSendLog6), XContentType.JSON));
 
-        BulkResponse bulkResponse = docService.bulkUpdateOrInsertDoc(indexName, type, bulkRequestBuilder);
+        BulkResponse bulkResponse = docService.bulkUpdateOrInsertDoc(indexName,  bulkRequestBuilder);
         BulkItemResponse[] bulkItemResponseArr = bulkResponse.getItems();
         for (BulkItemResponse bulkItemResponse :bulkItemResponseArr) {
             System.out.println("操作是否失败:"+ bulkItemResponse.isFailed() + " 文档版本：" + bulkItemResponse.getVersion());
@@ -350,9 +352,9 @@ public class DocServiceTest {
             Map<String,Object> maps =new HashMap<>();
             maps.put("province","天津");
             maps.put("replyTotal",120);
-            bulkRequestBuilder.add(new UpdateRequest(indexName, type, String.valueOf(i)).doc(maps));
+            bulkRequestBuilder.add(new UpdateRequest(indexName,  String.valueOf(i)).doc(maps));
         }
-        BulkResponse bulkResponse = docService.bulkUpdateOrInsertDoc(indexName, type, bulkRequestBuilder);
+        BulkResponse bulkResponse = docService.bulkUpdateOrInsertDoc(indexName,  bulkRequestBuilder);
         BulkItemResponse[] bulkItemResponseArr = bulkResponse.getItems();
         for (BulkItemResponse bulkItemResponse :bulkItemResponseArr) {
             System.out.println("操作是否失败:"+ bulkItemResponse.isFailed() + " 文档版本：" + bulkItemResponse.getVersion());
