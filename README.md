@@ -1,9 +1,3 @@
-**完整代码与资料下载，问题交流，请加QQ群，群号（1047661092）**
-
-![](./docs/images/ma.png)
-
-史上最全elasticsearch JAVA API使用代码,包括了几乎所有的常用查询API示例。
-
 Elasticsearch 会在7.0之后的版本废弃TransportClient，在8.0之后的版本移除TransportClient ([文档](https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/client.html))。因此，使用RestClient来进行相关的操作。
 
 > We plan on deprecating the `TransportClient` in Elasticsearch 7.0 and removing it completely in 8.0. Instead, you should be using the [Java High Level REST Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.4/java-rest-high.html), which executes HTTP requests rather than serialized Java requests. The [migration guide](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.4/java-rest-high-level-migration.html)describes  all the steps needed to migrate.
